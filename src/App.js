@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Sidebar from "./components/Sidebar";
 import Editor from "./components/Editor";
 
@@ -35,7 +35,7 @@ export default function App() {
   );
 
   const [currentNoteId, setCurrentNoteId] = useState(
-    (notes[0] && notes[0].id) || ""
+    notes[0] ? notes[0].id : ""
   );
 
   useEffect(() => {
@@ -75,7 +75,7 @@ export default function App() {
     return (
       notes.find((note) => {
         return note.id === currentNoteId;
-      }) || notes[0]
+      })
     );
   }
 
@@ -91,7 +91,7 @@ export default function App() {
             deleteNote={deleteNote}
           />
           {currentNoteId && notes.length > 0 && (
-            <Editor currentNote={findCurrentNote()} updateNote={updateNote} />
+            <Editor currentNote={findCurrentNote} updateNote={updateNote} />
           )}
         </Split>
       ) : (
